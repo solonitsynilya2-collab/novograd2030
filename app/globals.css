@@ -15,3 +15,8 @@ main{padding-bottom:32px}header .ghost{margin-left:auto}.hero{align-items:start;
 
 /* Stable entry height across all three tabs. */
 .entry{min-height:580px}
+/* Responsive layout and touch targets. */
+.hero>div,.entry,.panel,.playgrid>*{min-width:0}.hero{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}.switch button{min-height:44px}.slider input{min-height:44px}summary{min-height:44px;align-content:center}.rank b,.chips span{overflow-wrap:anywhere}.stepnum{flex-shrink:0}
+@media(min-width:851px) and (max-width:1100px){main{padding-inline:30px}.hero{gap:28px}h1{font-size:34px;letter-spacing:-1.5px}.entry{padding:24px}.entry h2{font-size:23px}.entry-icon{right:20px;top:20px}.how>div{padding:20px}.how h3{font-size:15px}.switch button{padding-inline:4px;font-size:10px}}
+@media(max-width:850px){.hero{grid-template-columns:minmax(0,1fr)}input:not([type=range]),select,textarea{font-size:16px;min-height:48px}.entry{min-height:590px}.playgrid{grid-template-columns:minmax(0,1fr)}.buttons>button{min-height:48px}.choice b{font-size:15px}.slider{padding-left:0}.rank{gap:12px}.gamehead h1{overflow-wrap:anywhere}}
+@media(max-width:480px){.weights{grid-template-columns:1fr;gap:0}.weights label{font-size:12px}.buttons{display:grid;grid-template-columns:1fr}.waiting{padding:28px 20px}.gamehead h1{font-size:26px}.gamehead .eyebrow{font-size:9px;letter-spacing:1px}.stepnum{font-size:36px}.logo span{font-size:12px;letter-spacing:.8px}header{gap:10px}.ghost{padding:10px 14px}.panel h2{font-size:23px}.entry h2{font-size:21px}.code{font-size:24px;letter-spacing:2px}}
