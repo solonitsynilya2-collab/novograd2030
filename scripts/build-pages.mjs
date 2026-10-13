@@ -1,0 +1,13 @@
+import {build} from 'vite';
+import react from '@vitejs/plugin-react';
+import fs from 'node:fs/promises';
+await build({configFile:false,root:'pages-client',plugins:[react()],build:{outDir:'../pages-dist',emptyOutDir:true,assetsInlineLimit:0}});
+let html=await fs.readFile('pages-dist/index.html','utf8');
+const script=html.match(/<script[^>]*src="([^"]+)"[^>]*><\/script>/)[0];
+const src=script.match(/src="([^"]+)"/)[1];
+let js=await fs.readFile('pages-dist'+src,'utf8');
+let css=await fs.readFile('app/globals.css','utf8');
+css=css.replace("@import 'tailwindcss';",'').replace("url('/fonts/montserrat.ttf')",`url('data:font/ttf;base64,${(await fs.readFile('public/fonts/montserrat.ttf')).toString('base64')}')`);
+html=html.replace(script,()=>`<style>${css}</style><script type="module">${js.replaceAll('</script','<\\/script')}</script>`);
+await fs.writeFile('pages-dist/index.html',html);
+console.log('Standalone GitHub Pages app built');
