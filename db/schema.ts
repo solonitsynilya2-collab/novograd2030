@@ -1,4 +1,4 @@
 import { sqliteTable, text, integer, uniqueIndex } from 'drizzle-orm/sqlite-core';
-export const rooms=sqliteTable('rooms',{id:text('id').primaryKey(),step:integer('step').notNull().default(0),created:text('created').notNull()});
+export const rooms=sqliteTable('rooms',{id:text('id').primaryKey(),scenario:text('scenario').notNull().default('classic'),step:integer('step').notNull().default(0),created:text('created').notNull()});
 export const players=sqliteTable('players',{id:text('id').primaryKey(),room:text('room').notNull(),name:text('name').notNull(),normalized:text('normalized').notNull(),team:text('team').notNull(),token:text('token').notNull(),created:text('created').notNull()},t=>[uniqueIndex('room_name').on(t.room,t.normalized)]);
 export const answers=sqliteTable('answers',{id:text('id').primaryKey(),player:text('player').notNull(),step:integer('step').notNull(),data:text('data').notNull(),updated:text('updated').notNull()},t=>[uniqueIndex('player_step').on(t.player,t.step)]);

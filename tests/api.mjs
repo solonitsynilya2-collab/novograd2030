@@ -46,7 +46,9 @@ const final={weights:{safety:40,work:30,trust:30},ratings:Object.fromEntries(['P
 await call({action:'answer',room,token:a.token,step:7,data:{...final,weights:{safety:90,work:30,trust:30}}},400);
 await call({action:'answer',room,token:a.token,step:7,data:final});
 await call({action:'advance',room,admin,step:7});
-state=await call({action:'state',room,token:a.token});assert.equal(state.scores[0].score,100);assert.equal(state.projects[0].score,4.1);
+state=await call({action:'state',room,token:a.token});assert.equal(state.scores[0].score,100);assert.equal(state.projects[0].score,4.1);assert.equal(state.projects.length,3);assert.equal(state.scenario,'network-v2');
+sqlite.prepare("INSERT INTO rooms(id,created) VALUES ('CLASSIC','2026-01-01')").run();
+const classic=await call({action:'state',room:'CLASSIC',admin});assert.equal(classic.scenario,'classic');assert.equal(classic.projects.length,4);
 const second=await call({action:'create',admin});await call({action:'state',room:second.room,token:a.token},401);
 for(let i=0;i<50;i++)await call({action:'join',room:second.room,name:`Участник ${i}`,team:'residents'});
 await call({action:'join',room:second.room,name:'Лишний участник',team:'residents'},409);

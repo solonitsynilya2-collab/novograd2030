@@ -1,0 +1,1 @@
+ALTER TABLE `rooms` ADD `scenario` text DEFAULT 'classic' NOT NULL;
